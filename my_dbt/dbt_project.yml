@@ -1,0 +1,69 @@
+# Project metadata
+name: 'my_dbt'
+version: '1.0.0'
+
+# Use the profile named "my_dbt" (must exist in profiles.yml)
+profile: 'my_dbt'
+
+# Paths
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# ==============================
+# SEED CONFIGURATION FOR MYSQL
+# ==============================
+# This ensures:
+# - Seeds load into the correct schema ("analytics")
+# - MySQL column quoting does NOT break (MySQL dislikes quoted identifiers)
+# - Optional: you can add column types per seed file
+
+seeds:
+  my_dbt:
+    # +schema: analytics
+    +quote_columns: false
+    annex1:
+      +column_types:
+        item_code: varchar(25)
+        category_code: varchar(25)
+    annex2:
+      +column_types:
+        item_code: varchar(25)
+        quantity_sold_kilo: float
+        unit_selling_price_rmb_kg: float
+        discount_yes_no: varchar(10)
+        sale_or_return: varchar(10)
+    annex3:
+      +column_types:
+        item_code: varchar(25)
+        wholesale_price_rmb_kg: float
+    annex4:
+      +enabled: true
+      +column_types:
+        item_code: varchar(25)
+        item_name: varchar(100)
+        loss_rate: float
+
+
+
+
+    # Example: column typing (optional — remove if not needed)
+    # customers:
+    #   +column_types:
+    #     customer_id: int
+    #     age: int
+
+# ==============================
+# MODEL CONFIGURATION
+# ==============================
+models:
+  my_dbt:
+    example:
+      +materialized: view
