@@ -8,8 +8,8 @@ import pandas as pd
 src = kagglehub.dataset_download("yapwh1208/supermarket-sales-data")
 
 # Absolute paths to mounted folders (persistent)
-dst = "/opt/airflow/project_root/data"
-dst2 = "/opt/airflow/project_root/my_dbt/seeds"
+dst = "data/"
+dst2 = "my_dbt/seeds"
 
 # Ensure target folders exist
 os.makedirs(dst, exist_ok=True)

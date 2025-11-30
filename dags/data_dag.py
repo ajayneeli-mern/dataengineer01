@@ -10,8 +10,14 @@ dag = DAG(
 
 run_script = BashOperator(
     task_id="run_script",
-    bash_command="python3 /opt/airflow/project_root/scripts/extract.py",
+    bash_command="sudo python3 /opt/airflow/scripts/extract.py",
     dag=dag,
 )
 
-run_script
+run_clean = BashOperator(
+    task_id="run_clean",
+    bash_command="sudo python3 /opt/airflow/my_dbt/clean_csvs.py",
+    dag=dag,
+)
+
+run_script>>run_clean

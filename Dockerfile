@@ -17,10 +17,11 @@ USER root
 RUN apt-get update && \
     apt-get install -y git && \
     apt-get clean
+
 USER root
-RUN mkdir -p /opt/airflow/project_root/data && \
-    mkdir -p /opt/airflow/project_root/my_dbt/seeds && \
-    chown -R airflow:0 /opt/airflow/project_root
+RUN mkdir -p /opt/airflow/data && \
+    mkdir -p /opt/airflow/my_dbt/seeds && \
+    chown -R airflow:0 /opt/airflow
 
 USER airflow
 # Install any additional Python packages

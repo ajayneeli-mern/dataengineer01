@@ -7,7 +7,7 @@ import pandas as pd
 # Download dataset from KaggleHub
 src = kagglehub.dataset_download("yapwh1208/supermarket-sales-data")
 
-# Absolute paths to mounted folders (persistent)
+# Linux-native writable folder
 dst = "/opt/airflow/data"
 dst2 = "/opt/airflow/my_dbt/seeds"
 

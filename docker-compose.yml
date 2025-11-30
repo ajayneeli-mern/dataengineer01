@@ -24,8 +24,7 @@ x-airflow-common:
     - ./terraform:/opt/airflow/terraform
     - ./scripts:/opt/airflow/scripts
     - ./data:/opt/airflow/data
-    - ./:/opt/airflow/project_root #top level 
-
+    - airflow_data:/opt/airflow/data  
     # DBT project mount
     - ./my_dbt:/opt/airflow/my_dbt
 
@@ -93,3 +92,4 @@ services:
 
 volumes:
   postgres-db-volume:
+  airflow_data:
