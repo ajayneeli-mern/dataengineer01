@@ -6,7 +6,7 @@ x-airflow-common:
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
-    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow_dbt
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
@@ -37,7 +37,7 @@ services:
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow
+      POSTGRES_DB: airflow_dbt
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
@@ -80,12 +80,12 @@ services:
         chown -R "${AIRFLOW_UID:-50000}:0" /opt/airflow/{logs,dags,plugins,terraform,my_dbt}
         exec airflow db migrate
         airflow users create \
-          --username airflow \
+          --username admin \
           --firstname Airflow \
           --lastname Admin \
           --role Admin \
-          --email admin@example.com \
-          --password airflow
+          --email ajayneeli6464@gmail.com \
+          --password admin123
     restart: "no"
 
 volumes:

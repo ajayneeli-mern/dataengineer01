@@ -11,9 +11,12 @@ RUN apt-get update && \
     rm terraform_1.6.6_linux_amd64.zip && \
     apt-get clean
 
+USER root
+RUN apt-get update && \
+    apt-get install -y git && \
+    apt-get clean
+    
 USER airflow
-
-
 # Install dbt-core + dbt-mysql plugin
 RUN pip install --no-cache-dir \
     dbt-core==1.7.19 \

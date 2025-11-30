@@ -10,5 +10,5 @@ terraform {
 # Create a folder on Windows
 resource "local_file" "folder_marker" {
   content  = "This folder was created by Terraform"
-  filename = "${path.cwd}/my_terraform_folder/.terraform_marker3"
+  filename = "${path.cwd}/my_terraform_folder/.terraform_marker2"
 }
