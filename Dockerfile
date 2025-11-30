@@ -13,5 +13,11 @@ RUN apt-get update && \
 
 USER airflow
 
-# Install additional Python packages if needed
+
+# Install dbt-core + dbt-mysql plugin
+RUN pip install --no-cache-dir \
+    dbt-core==1.7.19 \
+    dbt-mysql==1.7.0
+
+# Install any additional Python packages
 RUN pip install --no-cache-dir apache-airflow-providers-docker

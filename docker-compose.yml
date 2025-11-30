@@ -11,11 +11,21 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
+
+    # ===============================
+    # FORCE DBT TO USE PROJECT PROFILE
+    # ===============================
+    DBT_PROFILES_DIR: /opt/airflow/my_dbt
+
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
     - ./terraform:/opt/airflow/terraform
+
+    # DBT project mount
+    - ./my_dbt:/opt/airflow/my_dbt
+
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     postgres:
@@ -66,8 +76,8 @@ services:
     command:
       - -c
       - |
-        mkdir -p /opt/airflow/logs /opt/airflow/dags /opt/airflow/plugins /opt/airflow/terraform
-        chown -R "${AIRFLOW_UID:-50000}:0" /opt/airflow/{logs,dags,plugins,terraform}
+        mkdir -p /opt/airflow/logs /opt/airflow/dags /opt/airflow/plugins /opt/airflow/terraform /opt/airflow/my_dbt
+        chown -R "${AIRFLOW_UID:-50000}:0" /opt/airflow/{logs,dags,plugins,terraform,my_dbt}
         exec airflow db migrate
         airflow users create \
           --username airflow \
