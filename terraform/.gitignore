@@ -1,0 +1,6 @@
+.terraform
+my_terraform_folder
+providers
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
