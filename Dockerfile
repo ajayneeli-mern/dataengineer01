@@ -11,16 +11,18 @@ RUN apt-get update && \
     rm terraform_1.6.6_linux_amd64.zip && \
     apt-get clean
 
+
+
 USER root
 RUN apt-get update && \
     apt-get install -y git && \
     apt-get clean
-    
-USER airflow
-# Install dbt-core + dbt-mysql plugin
-RUN pip install --no-cache-dir \
-    dbt-core==1.7.19 \
-    dbt-mysql==1.7.0
+USER root
+RUN mkdir -p /opt/airflow/project_root/data && \
+    mkdir -p /opt/airflow/project_root/my_dbt/seeds && \
+    chown -R airflow:0 /opt/airflow/project_root
 
+USER airflow
 # Install any additional Python packages
-RUN pip install --no-cache-dir apache-airflow-providers-docker
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt

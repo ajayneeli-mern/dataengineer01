@@ -22,6 +22,9 @@ x-airflow-common:
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
     - ./terraform:/opt/airflow/terraform
+    - ./scripts:/opt/airflow/scripts
+    - ./data:/opt/airflow/data
+    - ./:/opt/airflow/project_root #top level 
 
     # DBT project mount
     - ./my_dbt:/opt/airflow/my_dbt

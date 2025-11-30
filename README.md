@@ -10,3 +10,11 @@ hard set:
 ##admin123
 
 docker-compose exec airflow-webserver airflow users create --username admin --password admin123 --firstname Admin --lastname User --email admin@example.com --role Admin
+
+
+docker-compose down --volumes
+docker-compose build
+
+rebuilt
+docker-compose build --no-cache
+docker-compose up -d

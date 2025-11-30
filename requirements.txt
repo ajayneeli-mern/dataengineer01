@@ -1,0 +1,16 @@
+# DBT
+dbt-core==1.7.19
+dbt-mysql==1.7.0
+
+# MySQL driver for Python
+mysql-connector-python==9.5.0
+
+# Kaggle access
+kagglehub==0.3.13
+kaggle==1.8.2
+
+# Data processing
+pandas==2.3.3
+
+# Airflow provider used in your Dockerfile
+apache-airflow-providers-docker
